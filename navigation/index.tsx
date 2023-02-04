@@ -16,6 +16,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import Profile from '../screens/Profile';
 import Questions from '../screens/Questions';
 import Feed from '../screens/Feed';
+import AskQuestion from '../screens/AskQuestion';
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -43,6 +44,10 @@ function RootNavigator() {
           name="Root" 
           component={BottomTabNavigator} 
           options={{ headerShown: false }} />
+      <Stack.Screen
+          name="AskQuestion"
+          component={AskQuestion}
+          options={{ headerShown: true }} />
     </Stack.Navigator>
   );
 }
