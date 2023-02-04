@@ -18,6 +18,11 @@ const Questions = () => {
   )
 }
 
+async function fetchQuestions()
+{
+
+}
+
 export default Questions
 
 const styles =  StyleSheet.create({
