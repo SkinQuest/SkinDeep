@@ -1,4 +1,4 @@
-import { View, Text, useWindowDimensions, StyleSheet, ScrollView, Image } from 'react-native'
+import { View, Pressable, Text, useWindowDimensions, StyleSheet, ScrollView, Image } from 'react-native'
 import React from 'react'
 
 const QuestionsCarousel = ({data}) => {
@@ -13,22 +13,24 @@ const QuestionsCarousel = ({data}) => {
           bounces={false}
           showsHorizontalScrollIndicator={false}>
           <Text>
-            {data.map((item, index) => {
-                if(!item.image){
+            {data.map((question, index) => {
+                if(!question){
                     return (
                         <View style={{width: SPACER}} key={index}/>
                     );
                 }
                 return (
-                <View style={{width: SIZE}} key={index}>
-                    <View style={styles.imageContainer}>
-                        <Image source={item.image} style={styles.image} />
-                    </View>
-                </View>
+                // <Pressable onPress={pressFunction}> 
+                  <View style={{width: SIZE}} key={index}>
+                      <View style={styles.imageContainer}>
+                          <Text style={styles.cardText}> {question.title} </Text>
+                          <Text> {question.body} </Text>
+                      </View>
+                  </View>
+                // <Pressable/>
                 );
             })};
           </Text>
-          
         </ScrollView>
       </View>
     );
@@ -40,10 +42,18 @@ const styles = StyleSheet.create({
     imageContainer: {
       borderRadius: 34,
       overflow: 'hidden',
+      backgroundColor: 'blue',
+      width: 300,
+      height: 200,
     },
     image: {
       width: '100%',
       height: undefined,
       aspectRatio: 1,
     },
+    cardText: {
+       fontSize: 30,
+       padding: 10,
+       marginLeft: 20 
+    }
 });
