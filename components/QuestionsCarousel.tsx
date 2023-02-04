@@ -1,11 +1,13 @@
 import { View, Pressable, Text, useWindowDimensions, StyleSheet, ScrollView, Image } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 const QuestionsCarousel = ({data}) => {
     const {width} = useWindowDimensions();
     const SIZE = width * 0.7;
     const SPACER = (width - SIZE) / 2;
-  
+    const navigation = useNavigation();
+
     return (
       <View>
         <ScrollView
@@ -20,14 +22,14 @@ const QuestionsCarousel = ({data}) => {
                     );
                 }
                 return (
-                // <Pressable onPress={pressFunction}> 
+                <Pressable onPress={()=> {navigation.navigate("CompanyPostQuestion",{question : question})}}> 
                   <View style={{width: SIZE}} key={index}>
                       <View style={styles.imageContainer}>
                           <Text style={styles.cardText}> {question.title} </Text>
                           <Text> {question.body} </Text>
                       </View>
                   </View>
-                // <Pressable/>
+                </Pressable>
                 );
             })};
           </Text>

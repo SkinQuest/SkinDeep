@@ -24,7 +24,11 @@ const AskQuestion = () => {
         multiline={true}
       />
       <Button
-        onPress={() => postQuestion(title, body)}
+        onPress={() => {
+          postQuestion(title, body);
+          setTitle("");
+          setBody("");
+        }}
         title="Post Question"
         color="#841584"
         accessibilityLabel="Learn more about this purple button"

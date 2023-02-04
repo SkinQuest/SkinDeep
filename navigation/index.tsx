@@ -17,6 +17,7 @@ import Profile from '../screens/Profile';
 import Questions from '../screens/Questions';
 import Feed from '../screens/Feed';
 import AskQuestion from '../screens/AskQuestion';
+import CompanyPostQuestion from '../screens/CompanyPostQuestion';
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -47,6 +48,10 @@ function RootNavigator() {
       <Stack.Screen
           name="AskQuestion"
           component={AskQuestion}
+          options={{ headerShown: true }} />
+      <Stack.Screen
+          name="CompanyPostQuestion"
+          component={CompanyPostQuestion}
           options={{ headerShown: true }} />
     </Stack.Navigator>
   );
