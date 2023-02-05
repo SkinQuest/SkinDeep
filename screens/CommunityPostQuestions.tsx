@@ -27,6 +27,7 @@ const CommunityPostQuestion = ({route}) => {
 
     return (
         <SafeAreaView style={styles.full}>
+                        <ScrollView>
             <View style={styles.communityView}>
                 <Text style={styles.communityText}>{question.title}</Text>
                 <Text style={{marginTop: 10, fontSize: 18}}>{question.body}</Text>
@@ -53,13 +54,13 @@ const CommunityPostQuestion = ({route}) => {
 
             {/* ANSWERS AND RESPONSES */}
 
-            <ScrollView>
             {responses.map((response)=>
             {
                 if (response.questionTitle == question.title)
                 {
                     return(
                         <View style={{width: SIZE}} key={response.id}>
+                            <Text style={{marginLeft: 20, marginTop: 26, fontWeight:'bold'}}>Comments:</Text>
                             <View style={styles.imageContainer}>
                                 <Text style={styles.cardText} key={response.id}>  {response.body} </Text>
                             </View>
@@ -96,15 +97,18 @@ const styles =  StyleSheet.create({
     imageContainer: {
         borderRadius: 34,
         overflow: 'hidden',
-        backgroundColor: 'blue',
-        width: 300,
+        backgroundColor: '#94a817',
+        width: 365,
         height: 100,
         margin: 10,
+        opacity: 0.5,
+        marginTop: 40
     },
     cardText: {
-        fontSize: 30,
+        fontSize: 25,
+        color: 'white',
         padding: 10,
-        marginLeft: 20 
+        marginLeft: 15 
     },
     row: {
         flexDirection: 'row',
