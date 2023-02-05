@@ -1,52 +1,87 @@
-import { Text, View, Button, StyleSheet } from 'react-native';
-import FontAwesome from '@expo/vector-icons/Ionicons';
+import { Text, View, Button, StyleSheet, FlatList, Pressable } from 'react-native';
+import FontAwesomeIcon from '@expo/vector-icons/FontAwesome';
 import React from 'react';
+import Icon from '@expo/vector-icons/FontAwesome';
+import { FontAwesome5 } from '@expo/vector-icons';
 
-const openChat = () => {
-    console.log("Message button clicked!");
+
+const editProf = () => {
+    console.log("Edit button clicked!");
   }
+
+const showFriends = () => {
+    console.log("Friends button clicked!");
+  }
+
+const reportUser = () => {
+  console.log("Report button clicked!");
+}
 
 interface Title {
     text: String
 }
 
-const styles = StyleSheet.create({
-    appButtonContainer: {
-        borderRadius: 15,
-        padding: 5,
-        width: '5px'
-    },
-});
+const BUTTON = [
+  {
+    type: "edit profile",
+    function: editProf,
+  },
+  {
+    type: "friends",
+    function: showFriends,
+  },
+  {
+    type: "Report",
+    function: reportUser,
+  },
+];
+
+const EditIcon = () => {
+  return (
+    <FontAwesomeIcon icon="fa-solid fa-pen-to-square" style={{color: "black"}}/>
+  );
+}
 
 const ProfileButton = (props : Title) => {
-    return(
-      <View>
-        <Text>{props.text}</Text>
-        if (props.text == "message"){
-            <FontAwesome.Button
-              style={styles.appButtonContainer}
-              name="paper-plane"
-              color="white"
-              backgroundColor="#29524A"
-              onPress ={openChat}
-            >
-              Message
-            </FontAwesome.Button>
-          }
-        else if (props.text == "block"){
-            <FontAwesome.Button
-              style={styles.appButtonContainer}
-              name="paper-plane"
-              color="red"
-              backgroundColor="white"
-              onPress ={openChat}
-            >
-              Message
-            </FontAwesome.Button>
-          }
-  
-      </View>
-    );
+    if (props.text == "edit profile"){
+      return(
+        <View style={styles.appButtonContainer}>
+          <Pressable onPress={showFriends}>
+           <FontAwesome5 name="users" size={24} color="black" />
+          </Pressable>
+          <Button 
+            title={"Edit Profile"}
+          />
+        </View>
+      );
+    }
+
+    else if (props.text == "friends"){
+      return(
+        <View style={styles.appButtonContainer}>
+          <Pressable onPress={showFriends}>
+           <FontAwesome5 name="users" size={24} color="black" />
+          </Pressable>
+          <Button
+            title={"Friends"}
+          />
+        </View>
+      );
+    }
   }
 
   export default ProfileButton;
+
+
+
+
+const styles = StyleSheet.create({
+    appButtonContainer: {
+        borderRadius: 40,
+        marginLeft: 50,
+        textAlign : "center",
+        alignContent: "center",
+        flexDirection: "row",
+        alignSelf: "center"
+    },
+});

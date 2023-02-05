@@ -17,6 +17,7 @@
     "expo-splash-screen": "^0.17.5",
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.17.1",
+    "galio-framework": "^0.8.0",
     "install": "^0.13.0",
     "npm": "^9.4.1",
     "react": "18.1.0",

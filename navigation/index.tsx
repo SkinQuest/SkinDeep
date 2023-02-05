@@ -18,6 +18,7 @@ import Questions from '../screens/Questions';
 import Feed from '../screens/Feed';
 import AskQuestion from '../screens/AskQuestion';
 import CompanyPostQuestion from '../screens/CompanyPostQuestion';
+import CommunityPostQuestion from '../screens/CommunityPostQuestions';
 
 // icons
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
@@ -52,7 +53,8 @@ function RootNavigator() {
   const [password, setPassword] = React.useState('');
   const [user, setUser] = React.useState();
 
-  if (!user){
+  // if (!user){
+    if(false) {
     return (
       <View style={styles.centered}>
         <Text> Login Here:</Text>
@@ -109,6 +111,10 @@ function RootNavigator() {
           <Stack.Screen
             name="CompanyPostQuestion"
             component={CompanyPostQuestion}
+            options={{ headerShown: true }} />
+          <Stack.Screen
+            name="CommunityPostQuestion"
+            component={CommunityPostQuestion}
             options={{ headerShown: true }} />
         </Stack.Navigator>
       </UserContext.Provider> 
