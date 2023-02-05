@@ -108,7 +108,7 @@ const Questions = ({navigation}) => {
 
 function intersection(a, b)
 {
-  return filteredArray = a.filter(value => b.includes(value));
+  return a.filter(value => b.includes(value));
 }
 
 const styles =  StyleSheet.create({
