@@ -26,9 +26,9 @@ const CommunityPostQuestion = ({route}) => {
     }, []);
 
     return (
-        <SafeAreaView>
-            <View>
-                <Text>{question.title}</Text>
+        <SafeAreaView style={styles.full}>
+            <View style={styles.communityView}>
+                <Text style={styles.communityText}>{question.title}</Text>
                 <Text>{question.body}</Text>
             </View>
             <View>
@@ -38,15 +38,16 @@ const CommunityPostQuestion = ({route}) => {
                     value={body}
                     multiline={true}
                 />
-                
+                <View style={styles.ask}>
                 <Button
                     onPress={() => {
                         postUserResponse(body, question.title)
                         setBody("");
                     }}
                     title="Submit"
-                    color="#841584"
+                    color="white"
                 />
+                </View>
             </View>
 
             {/* ANSWERS AND RESPONSES */}
@@ -87,7 +88,9 @@ const styles =  StyleSheet.create({
         height: 200,
         margin: 12,
         borderWidth: 1,
-        padding: 10,
+        padding: 20,
+        borderRadius: 20,
+        fontSize: 18
       },
     imageContainer: {
         borderRadius: 34,
@@ -104,7 +107,25 @@ const styles =  StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-    }
+    },
+    full:{
+        backgroundColor: 'white',
+        height: 800,
+    },
+    ask: {
+        width: 250,
+        marginLeft: 68,
+        borderRadius: 20,
+        backgroundColor: '#94a817'
+    },
+    communityView: {
+        margin: 10,
+        padding: 10,
+    },
+    communityText: {
+        fontSize: 35,
+        fontWeight: 'bold',
+    },
 });
 
   

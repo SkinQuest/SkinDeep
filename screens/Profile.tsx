@@ -12,6 +12,7 @@ import FontAwesomeIcon from '@expo/vector-icons/Ionicons';
 import React from 'react';
 import ProfileButton from '../components/ProfileButton';
 import { Text, Block, theme } from 'galio-framework';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -46,6 +47,7 @@ type ProfileData = {
 class Profile extends React.Component {
   render() {
     return (
+      <SafeAreaView style={{backgroundColor: 'white', marginTop: -20}}>
       <Block flex style={styles.profile}>
         <Block flex>
         <ImageBackground
@@ -65,7 +67,7 @@ class Profile extends React.Component {
                 </Block>
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
-                    <Text bold size={28} color="#32325D">
+                    <Text bold size={28} color="black">
                       Chancellor Anteater
                     </Text>
                     <Block
@@ -76,6 +78,7 @@ class Profile extends React.Component {
                   >
                     <Button
                     title="Edit Profile"
+                    color='gray'
                     />
                     
                   </Block>
@@ -108,6 +111,7 @@ class Profile extends React.Component {
             </ImageBackground>
         </Block>
 </Block>
+</SafeAreaView>
 );
 }
 }

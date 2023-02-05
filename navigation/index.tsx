@@ -21,7 +21,9 @@ import CompanyPostQuestion from '../screens/CompanyPostQuestion';
 import CommunityPostQuestion from '../screens/CommunityPostQuestions';
 
 // icons
-import { MaterialCommunityIcons, MaterialIcons, FontAwesome } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons, MaterialIcons, FontAwesome, FontAwesome5 } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
+
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -111,11 +113,15 @@ function RootNavigator() {
           <Stack.Screen
             name="CompanyPostQuestion"
             component={CompanyPostQuestion}
-            options={{ headerShown: true }} />
+            options={{ headerShown: true,
+              headerTitle:"",
+          }} />
           <Stack.Screen
             name="CommunityPostQuestion"
             component={CommunityPostQuestion}
-            options={{ headerShown: true }} />
+            options={{ headerShown: true,
+              headerTitle:"",
+            }} />
         </Stack.Navigator>
       </UserContext.Provider> 
     );
@@ -170,7 +176,7 @@ function BottomTabNavigator() {
               <Text style={{position: 'absolute', marginLeft: 20, marginTop: 5, fontSize: 30, marginBottom: 10, fontWeight: 'bold'}}>Questions</Text>
           ),
           headerRight:() => (
-            <FontAwesome name="pencil-square-o" size={30} color="black"  style={{marginRight: 30, }}/>
+            <FontAwesome5 name="bell" size={30} color="black"style={{marginRight: 30, }} />
           )
         }}
       />

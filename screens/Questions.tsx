@@ -6,11 +6,12 @@ import { collection, getDocs } from "firebase/firestore";
 
 
 import db from '../firebase/config'
+import { AuthErrorCodes } from 'firebase/auth';
 
 const Questions = ({navigation}) => {
 
-  const {width} = useWindowDimensions();
-  const SIZE = width * 0.7;
+  const {height} = useWindowDimensions();
+  const SIZE = height * 0.8;
   const [companyQuestions, setCompanyQuestions] = React.useState([])
   const [communityQuestions, setCommunityQuestions] = React.useState([])
 
@@ -72,9 +73,12 @@ const Questions = ({navigation}) => {
             {communityQuestions.map((question)=>
             <Pressable onPress={()=> {navigation.navigate("CommunityPostQuestion",{question : question})}}>
             <View>
-              <View style={{width: SIZE}} key={question.id}>
+              <View style={{width: SIZE, marginBottom: 18}} key={question.id}>
                 <View style={styles.imageContainer}>
-                  <Text key={question.id}> {question.title} </Text>
+                  <Text style={styles.cardText} key={question.id}> 
+                    {/* {question.title}  */}
+                    Have you tried steroid ointments?
+                  </Text>
                 </View>
               </View>
             </View>
@@ -83,14 +87,17 @@ const Questions = ({navigation}) => {
       
       {communityQuestions.map((question)=>
         <View>
-          
+  
         </View>
 
       )}
+      <View style={styles.ask}>
        <Button
           title="Ask a Question"
+          color="white"
           onPress={()=> {navigation.navigate("AskQuestion")}}
        />
+       </View>
     </SafeAreaView>
     </ScrollView>
   )
@@ -105,11 +112,14 @@ const styles =  StyleSheet.create({
   },
   imageContainer: {
     borderRadius: 34,
-    overflow: 'hidden',
-    backgroundColor: 'blue',
-    width: 300,
-    height: 100,
-    margin: 10,
+    // overflow: 'hidden',
+    backgroundColor: '#EAE0D5',
+    width: 368,
+    height: 190,
+    marginLeft: 10,
+    // position: 'absolute',
+    // zIndex: 2,
+    shadowColor: 'black', shadowOffset: {width: 1, height: 1}, shadowOpacity: 0.5, shadowRadius: 1, elevation: 2
   },
   cardText: {
       fontSize: 30,
@@ -132,7 +142,22 @@ const styles =  StyleSheet.create({
     margin: 10, 
     marginTop: 12, 
     fontWeight:'bold'
-  }
+  },
+  cardText: {
+    color: '#775144',
+    fontWeight: 'bold',
+    fontSize: 30,
+    padding: 10,
+    margin: 5, 
+    marginLeft: 10,
+    marginRight: 10,
+ },
+ ask: {
+  width: 250,
+  marginLeft: 68,
+  borderRadius: 20,
+  backgroundColor: '#94a817'
+ }
 })
 
 export default Questions

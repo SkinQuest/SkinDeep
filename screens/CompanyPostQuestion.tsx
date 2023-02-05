@@ -28,9 +28,9 @@ const CompanyPostQuestion = ({route}) => {
     }, []);
 
     return (
-        <SafeAreaView>
-            <View>
-                <Text>{question.title}</Text>
+        <SafeAreaView style={styles.full}>
+            <View style={styles.companyView}>
+                <Text style={styles.companyText}>{question.title}</Text>
             </View>
             <View>
             <TextInput
@@ -39,15 +39,17 @@ const CompanyPostQuestion = ({route}) => {
             value={body}
             multiline={true}
             />
-            <Button
-            onPress={() => {
-                postUserResponse(body)
-                setBody("");
-            }}
-            title="Submit"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-            />
+            <View style={styles.ask}>
+              <Button
+              onPress={() => {
+                  postUserResponse(body)
+                  setBody("");
+              }}
+              title="Submit"
+              color="white"
+              accessibilityLabel="Learn more about this purple button"
+              />
+            </View>
             </View>
         </SafeAreaView>
     );
@@ -69,8 +71,11 @@ const styles =  StyleSheet.create({
     longInput: {
         height: 200,
         margin: 12,
+        marginTop: 20,
         borderWidth: 1,
-        padding: 10,
+        padding: 20,
+        borderRadius: 20,
+        fontSize: 18,
       },
     imageContainer: {
         borderRadius: 34,
@@ -84,7 +89,25 @@ const styles =  StyleSheet.create({
         fontSize: 30,
         padding: 10,
         marginLeft: 20 
-    }
+    },
+    ask: {
+      width: 250,
+      marginLeft: 68,
+      borderRadius: 20,
+      backgroundColor: '#94a817'
+     },
+     companyText: {
+      fontSize: 30,
+      fontWeight: 'bold',
+     },
+     companyView: {
+      margin: 10,
+      padding: 10,
+     },
+     full:{
+      backgroundColor: 'white',
+      height: 800,
+     }
   });
 
   
