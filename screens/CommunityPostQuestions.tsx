@@ -10,18 +10,18 @@ const CommunityPostQuestion = ({route}) => {
     const {question} = route.params;
     const [body, setBody] = React.useState();
     const [responses, setResponses] = React.useState([]);
+    async function fetchResponses()
+    {
+      var newResponses = []
+      const querySnapshot = await getDocs(collection(db, "CommunityQuestionsResponses"));
+      querySnapshot.forEach((doc) => {
+        newResponses.push(doc.data());
+      });
+      setResponses(newResponses);
+    }
 
     React.useEffect(() => {
         // Fetch questions from firebase
-        async function fetchResponses()
-        {
-          var newResponses = []
-          const querySnapshot = await getDocs(collection(db, "CommunityQuestionsResponses"));
-          querySnapshot.forEach((doc) => {
-            newResponses.push(doc.data());
-          });
-          setResponses(newResponses);
-        }
         fetchResponses()
     }, []);
 
@@ -45,6 +45,7 @@ const CommunityPostQuestion = ({route}) => {
                     onPress={() => {
                         postUserResponse(body, question.title)
                         setBody("");
+                        fetchResponses();
                     }}
                     title="Submit"
                     color="white"
