@@ -20,7 +20,7 @@ import AskQuestion from '../screens/AskQuestion';
 import CompanyPostQuestion from '../screens/CompanyPostQuestion';
 
 // icons
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons, MaterialIcons, FontAwesome } from '@expo/vector-icons'; 
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -122,7 +122,8 @@ function RootNavigator() {
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator<RootTabParamList>(
+);
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -133,14 +134,20 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         tabBarStyle: { height: 100,},
-      }}>
+      }}
+      >
       <BottomTab.Screen
         name="Feed"
         component={Feed}
         options=
         {{
+          tabBarShowLabel: false,
           headerTitle:"",
-          tabBarIcon: ({ color, focused }) => <MaterialCommunityIcons name="cards-variant" size={30} color={focused ? "black" : "gray"}/>
+          tabBarIcon: ({ color, focused }) => <><MaterialCommunityIcons name="cards-variant" size={30} color={focused ? "black" : "gray"}/>
+          <Text style={{ marginTop: 5, fontSize: 12, color: focused ? "black" : "gray", fontWeight: focused ? "bold" : "normal" }}>Feed</Text></>,
+          headerLeft:() => (
+            <Text style={{position: 'absolute', marginLeft: 10, marginTop: 2, fontSize: 28, fontWeight: 'bold'}}>Feed</Text>
+          ),
         }}
       />
       <BottomTab.Screen
@@ -148,9 +155,17 @@ function BottomTabNavigator() {
         component={Questions}
         options=
         {{
+          tabBarShowLabel: false,
           headerTitle:"",
           tabBarIcon: ({ color, focused }) => 
-            <MaterialCommunityIcons name="comment-question-outline" size={30} color={focused ? "black" : "gray"} />
+            <><MaterialCommunityIcons name="comment-question-outline" size={30} color={focused ? "black" : "gray"} />
+            <Text style={{marginTop: 5,  fontSize: 12, color: focused ? "black" : "gray", fontWeight: focused ? "bold" : "normal"  }}>Questions</Text></>,
+          headerLeft:() => (
+              <Text style={{position: 'absolute', marginLeft: 20, marginTop: 5, fontSize: 30, marginBottom: 10, fontWeight: 'bold'}}>Questions</Text>
+          ),
+          headerRight:() => (
+            <FontAwesome name="pencil-square-o" size={30} color="black"  style={{marginRight: 30, }}/>
+          )
         }}
       />
        <BottomTab.Screen
@@ -158,8 +173,10 @@ function BottomTabNavigator() {
           component={Profile}
           options=
           {{
+            tabBarShowLabel: false,
             headerTitle:"",
-            tabBarIcon: ({ color, focused }) => <MaterialIcons name="person-outline" size={30} color={focused ? "black" : "gray"} />
+            tabBarIcon: ({ color, focused }) => <><MaterialIcons name="person-outline" size={30} color={focused ? "black" : "gray"} />
+            <Text style={{ marginTop: 5, fontSize: 12, color: focused ? "black" : "gray", fontWeight: focused ? "bold" : "normal"  }}>Profile</Text></>,
           }}
       />
     </BottomTab.Navigator>
