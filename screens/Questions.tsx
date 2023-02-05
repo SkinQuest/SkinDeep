@@ -14,6 +14,23 @@ const Questions = ({navigation}) => {
   const SIZE = height * 0.8;
   const [companyQuestions, setCompanyQuestions] = React.useState([])
   const [communityQuestions, setCommunityQuestions] = React.useState([])
+  const [tagSelections, setTagSelections] = React.useState<{[key: string]:boolean}>({
+    "Eczema":false, 
+    "Acne":false,
+    "Psoriasis":false,
+    "Rosacea":false,
+    "Contact Dermatitis":false,
+    "Alopecia":false
+  });
+
+  const [tagColors, setTagColors] = React.useState({
+    "Eczema":'#BEA8A7', 
+    "Acne":'#C09891',
+    "Psoriasis":'#775144',
+    "Rosacea":'#2A0800',
+    "Contact Dermatitis":'#C09891',
+    "Alopecia":'#775144'
+  });
 
   React.useEffect(() => {
     // Fetch questions from firebase
@@ -43,67 +60,71 @@ const Questions = ({navigation}) => {
   return (
     
     <ScrollView bounces={false}>
-    <View style={{backgroundColor: 'white'}}>
-    <ScrollView style={{marginLeft: 10, marginBottom: 25, marginTop: 15}} horizontal={true} showsHorizontalScrollIndicator={false} bounces={true}>
-        <View style={styles.filterButtons}>
-          <Text style={styles.filterText}>Eczema</Text>
-        </View>
-        <View style={[styles.filterButtons, {backgroundColor: '#C09891'}]}>
-          <Text style={styles.filterText}>Acne</Text>
-        </View>
-        <View style={[styles.filterButtons, {backgroundColor: '#775144'}]}>
-          <Text style={styles.filterText}>Psoriasis</Text>
-        </View>
-        <View style={[styles.filterButtons, {backgroundColor: '#2A0800'}]}>
-          <Text style={styles.filterText}>Rosacea</Text>
-        </View>
-        <View style={[styles.filterButtons, {backgroundColor: '#C09891'}]}>
-          <Text style={styles.filterText}>Contact Dermatitis</Text>
-        </View>
-        <View style={[styles.filterButtons, {backgroundColor: '#775144'}]}>
-          <Text style={styles.filterText}>Alopecia</Text>
-        </View>
-      </ScrollView>
+      <View style={{backgroundColor: 'white'}}>
+        <ScrollView style={{marginLeft: 10, marginBottom: 25, marginTop: 15}} horizontal={true} showsHorizontalScrollIndicator={false} bounces={true}>
+          {Object.keys(tagSelections).map((tag)=>
+              <Pressable onPress={()=> setTagSelections((previous)=>({...previous, [tag]:!previous[tag]}))} 
+                         style={[tagSelections[tag] ? styles.pressedTags : styles.unpressedTags, {backgroundColor: tagColors[tag]}]}>
+                  <Text style={[styles.filterText]}>{tag}</Text>
+              </Pressable>
+          )}
+        </ScrollView>
       </View>
-      
-    <SafeAreaView style={styles.container}>
-       
-      <QuestionsCarousel data={companyQuestions}/>
-      
-            {communityQuestions.map((question)=>
-            <Pressable onPress={()=> {navigation.navigate("CommunityPostQuestion",{question : question})}}>
-            <View>
-              <View style={{width: SIZE, marginBottom: 18}} key={question.id}>
-                <View style={styles.imageContainer}>
-                  <Text style={styles.cardText} key={question.id}> 
-                    {/* {question.title}  */}
-                    Have you tried steroid ointments?
-                  </Text>
-                </View>
-              </View>
-            </View>
-            </Pressable>
-            )}
-      
-      {communityQuestions.map((question)=>
-        <View>
-  
-        </View>
 
-      )}
-      <View style={styles.ask}>
-       <Button
-          title="Ask a Question"
-          color="white"
-          onPress={()=> {navigation.navigate("AskQuestion")}}
-       />
-       </View>
-    </SafeAreaView>
+        
+      <SafeAreaView style={styles.container}>
+        
+        <QuestionsCarousel data={companyQuestions}/>
+        
+              {communityQuestions.map((question)=>
+              {
+              if(intersection(question.tags, Object.keys(tagSelections).filter((tag)=>tagSelections[tag])).length != 0)
+              {
+                return(
+                  <Pressable onPress={()=> {navigation.navigate("CommunityPostQuestion",{question : question})}}>
+                    <View>
+                      <View style={{width: SIZE, marginBottom: 18}} key={question.id}>
+                        <View style={styles.imageContainer}>
+                          <Text style={styles.cardText} key={question.id}> {question.title} </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </Pressable>
+                )
+                }
+              })}
+              <View style={styles.ask}>
+                <Button 
+              title="Ask a Question"
+              color="white"
+              onPress={()=> {navigation.navigate("AskQuestion")}}
+              />
+              </View>
+        
+      </SafeAreaView>
     </ScrollView>
   )
 }
 
+function intersection(a, b)
+{
+  var ai=0, bi=0;
+  var result = [];
 
+  while( ai < a.length && bi < b.length )
+  {
+     if      (a[ai] < b[bi] ){ ai++; }
+     else if (a[ai] > b[bi] ){ bi++; }
+     else /* they're equal */
+     {
+       result.push(a[ai]);
+       ai++;
+       bi++;
+     }
+  }
+
+  return result;
+}
 
 const styles =  StyleSheet.create({
   container: {
@@ -157,7 +178,29 @@ const styles =  StyleSheet.create({
   marginLeft: 68,
   borderRadius: 20,
   backgroundColor: '#94a817'
- }
+ },
+  pressedTags: {
+    borderWidth: 0,
+    height: 40, 
+    backgroundColor: '#BEA8A7', 
+    borderRadius: 30, 
+    marginRight: 10,
+    marginBottom: 5,
+    marginTop: 5,
+    shadowColor: 'black', shadowOffset: {width: 1, height: 1}, shadowOpacity: 0.5, shadowRadius: 1, elevation: 2,
+    borderWidth: 1.3,
+    borderColor: 'black',
+  },
+unpressedTags: {
+    borderWidth: 0,
+    height: 40, 
+    backgroundColor: '#BEA8A7', 
+    borderRadius: 30, 
+    marginRight: 10,
+    marginBottom: 5,
+    marginTop: 5,
+    shadowColor: 'black', shadowOffset: {width: 1, height: 1}, shadowOpacity: 0.5, shadowRadius: 1, elevation: 2
+  }
 })
 
 export default Questions

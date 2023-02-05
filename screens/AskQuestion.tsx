@@ -14,8 +14,7 @@ const AskQuestion = () => {
       "Acne":false,
       "Psoriasis":false,
       "Rosacea":false,
-      "Contact":false,
-      "Dermatitis":false,
+      "Contact Dermatitis":false,
       "Alopecia":false
   });
 
@@ -42,7 +41,7 @@ const AskQuestion = () => {
       </ScrollView>
       <Button
         onPress={() => {
-          postQuestion(title, body);
+          postQuestion(title, body, Object.keys(tagSelections).filter((tag)=>tagSelections[tag]));
           setTitle("");
           setBody("");
         }}
@@ -54,11 +53,12 @@ const AskQuestion = () => {
   )
 }
 
-async function postQuestion (postTitle, postBody) {
+async function postQuestion (postTitle, postBody, tags) {
   try {
     const docRef = await addDoc(collection(db, "Questions"), {
       title: postTitle,
       body: postBody,
+      tags: tags,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
