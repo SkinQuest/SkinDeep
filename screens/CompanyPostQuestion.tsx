@@ -1,23 +1,36 @@
-import { Text, View, TextInput, StyleSheet, SafeAreaView, Button } from 'react-native';
+import { Text, View, TextInput, StyleSheet, SafeAreaView, Button, useWindowDimensions, ScrollView } from 'react-native';
 import React from 'react';
 import db from '../firebase/config'
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, getDocs } from "firebase/firestore"; 
 
 import { UserContext } from '../components/UserContext';
 
 
 const CompanyPostQuestion = ({route}) => {
-
+    const {width} = useWindowDimensions();
+    const SIZE = width * 0.7;
     const {question} = route.params;
     const [body, setBody] = React.useState();
+    const [responses, setResponses] = React.useState([]);
 
-    const { value } = React.useContext(UserContext);
+    React.useEffect(() => {
+        // Fetch questions from firebase
+        async function fetchResponses()
+        {
+          var newResponses = []
+          const querySnapshot = await getDocs(collection(db, "CompanyQuestionsResponses"));
+          querySnapshot.forEach((doc) => {
+            newResponses.push(doc.data());
+          });
+          setResponses(newResponses);
+        }
+        fetchResponses()
+    }, []);
 
     return (
         <SafeAreaView>
             <View>
-                <Text>{question.body}</Text>
-                <Text>{"User Email:" + value}</Text>
+                <Text>{question.title}</Text>
             </View>
             <View>
             <TextInput
@@ -41,7 +54,7 @@ const CompanyPostQuestion = ({route}) => {
 
 };
 
-async function postUserResponse (postBody) {
+async function postUserResponse(postBody) {
     try {
       const docRef = await addDoc(collection(db, "CompanyQuestionsResponses"), {
         body: postBody,
@@ -59,6 +72,21 @@ const styles =  StyleSheet.create({
         borderWidth: 1,
         padding: 10,
       },
-  })
+    imageContainer: {
+        borderRadius: 34,
+        overflow: 'hidden',
+        backgroundColor: 'blue',
+        width: 300,
+        height: 100,
+        margin: 10,
+    },
+    cardText: {
+        fontSize: 30,
+        padding: 10,
+        marginLeft: 20 
+    }
+  });
+
+  
 
 export default CompanyPostQuestion;
