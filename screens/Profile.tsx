@@ -61,7 +61,7 @@ class Profile extends React.Component {
               <Block flex style={styles.profileCard}>
               <Block middle style={styles.avatarContainer}>
                   <Image
-                    source={require('../assets/gillman.png')}
+                    source={require('../assets/petr.png')}
                     style={styles.avatar}
                   />
                 </Block>
@@ -99,10 +99,7 @@ class Profile extends React.Component {
                       color="black"
                       style={{ textAlign: "center", margin:20}}
                     >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-                        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-                        optio, eaque rerum! Provident similique accusantium nemo autem.
+                        As a student at UCI, I am deeply passionate about both my education and health. In my free time, I eagerly attend seminars and workshops on skin health to stay informed about the latest research and advancements in the field. This passion drives me to make a positive impact and improve the lives of those affected by skin conditions. I hope my contributions will make an impact!
                     </Text>
                   </Block>
                 </Block>
