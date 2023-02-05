@@ -19,8 +19,6 @@ import Feed from '../screens/Feed';
 import AskQuestion from '../screens/AskQuestion';
 import CompanyPostQuestion from '../screens/CompanyPostQuestion';
 
-import CompanyPostQuestion from '../screens/CompanyPostQuestion';
-
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 import { UserContext } from '../components/UserContext';
@@ -92,6 +90,7 @@ function RootNavigator() {
   );
   }
   else {
+    console.log(user)
     return (
       <UserContext.Provider value={user}>
         <Stack.Navigator

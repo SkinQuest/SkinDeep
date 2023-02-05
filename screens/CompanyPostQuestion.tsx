@@ -3,16 +3,21 @@ import React from 'react';
 import db from '../firebase/config'
 import { collection, addDoc } from "firebase/firestore"; 
 
+import { UserContext } from '../components/UserContext';
+
 
 const CompanyPostQuestion = ({route}) => {
 
     const {question} = route.params;
     const [body, setBody] = React.useState();
 
+    const { value } = React.useContext(UserContext);
+
     return (
         <SafeAreaView>
             <View>
                 <Text>{question.body}</Text>
+                <Text>{"User Email:" + value}</Text>
             </View>
             <View>
             <TextInput
