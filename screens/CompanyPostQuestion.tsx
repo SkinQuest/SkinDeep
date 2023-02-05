@@ -11,13 +11,10 @@ const CompanyPostQuestion = ({route}) => {
     const {question} = route.params;
     const [body, setBody] = React.useState();
 
-    const { value } = React.useContext(UserContext);
-
     return (
         <SafeAreaView>
             <View>
                 <Text>{question.body}</Text>
-                <Text>{"User Email:" + value}</Text>
             </View>
             <View>
             <TextInput
@@ -41,7 +38,7 @@ const CompanyPostQuestion = ({route}) => {
 
 };
 
-async function postUserResponse (postBody) {
+async function postUserResponse(postBody) {
     try {
       const docRef = await addDoc(collection(db, "CompanyQuestionsResponses"), {
         body: postBody,
