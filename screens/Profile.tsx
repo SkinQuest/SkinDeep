@@ -15,34 +15,7 @@ import { Text, Block, theme } from 'galio-framework';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("screen");
-
 const thumbMeasure = (width - 48 - 32) / 3;
-
-
-/*
-
-
-const Profile = () => {
-  return (
-    <View>
-      <View style={styles2.appButtonsContainer}>
-        <Text>ABC abcdefg</Text>
-        <FontAwesomeIcon icon="fa-solid fa-pen-to-square" style={{color: "black"}}/>
-        <ProfileButton text="edit profile"/>
-        <FontAwesomeIcon icon="fa-solid fa-users" style={{color: "black"}}/>
-        <ProfileButton text="friends"/>
-      </View>
-
-    </View>
-  )
-} 
-
-type ProfileData = {
-  username: string;
-  bio: string
-}
-
-*/
 
 class Profile extends React.Component {
   render() {
@@ -51,7 +24,7 @@ class Profile extends React.Component {
       <Block flex style={styles.profile}>
         <Block flex>
         <ImageBackground
-            source={require("../assets/anteater.png")}
+            source={require("../assets/anteaterPic.png")}
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
           >
