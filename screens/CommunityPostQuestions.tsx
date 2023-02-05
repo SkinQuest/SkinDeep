@@ -53,6 +53,7 @@ const CommunityPostQuestion = ({route}) => {
             </View>
 
             {/* ANSWERS AND RESPONSES */}
+            <Text style={{marginLeft: 20, marginTop: 26, fontWeight:'bold'}}>Comments:</Text>
 
             {responses.map((response)=>
             {
@@ -60,7 +61,6 @@ const CommunityPostQuestion = ({route}) => {
                 {
                     return(
                         <View style={{width: SIZE}} key={response.id}>
-                            <Text style={{marginLeft: 20, marginTop: 26, fontWeight:'bold'}}>Comments:</Text>
                             <View style={styles.imageContainer}>
                                 <Text style={styles.cardText} key={response.id}>  {response.body} </Text>
                             </View>
