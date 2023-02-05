@@ -6,7 +6,7 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
-import { ColorSchemeName, Pressable} from 'react-native';
+import { ColorSchemeName, Text, View, TextInput, Button, StyleSheet,  Pressable } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,10 +17,19 @@ import Profile from '../screens/Profile';
 import Questions from '../screens/Questions';
 import Feed from '../screens/Feed';
 import AskQuestion from '../screens/AskQuestion';
+import CompanyPostQuestion from '../screens/CompanyPostQuestion';
 
 // icons
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+import { UserContext } from '../components/UserContext';
+
+import db from '../firebase/config'
+
+
+let auth = getAuth();
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -39,21 +48,75 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [user, setUser] = React.useState();
 
-  return (
-    <Stack.Navigator
-    screenOptions={{ animation: 'fade' }}>
-      <Stack.Screen 
-          name="Root" 
-          component={BottomTabNavigator} 
-          options={{ headerShown: false }} />
-      <Stack.Screen
-          name="AskQuestion"
-          component={AskQuestion}
-          options={{ headerShown: true }} />
-    </Stack.Navigator>
+  if (!user){
+    return (
+      <View style={styles.centered}>
+        <Text> Login Here:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setEmail}
+          value={email}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={setPassword}
+          value={password}
+        />
+        <Button
+          onPress={() => {
+            console.log('signing in');
+            async function signIn() {
+              signInWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                const newUser = userCredential.user;
+                console.log(newUser.email)
+                setUser(newUser.email);
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("ERROR")
+                console.log(errorMessage);
+              });
+            }
+            signIn();
+            console.log('signed in')
+          }}
+          title="Login"
+          color="#841584"
+        />
+      </View>
   );
+  }
+  else {
+    console.log(user)
+    return (
+      <UserContext.Provider value={user}>
+        <Stack.Navigator
+          screenOptions={{ animation: 'fade' }}>
+          <Stack.Screen 
+            name="Root" 
+            component={BottomTabNavigator} 
+            options={{ headerShown: false }} />
+          <Stack.Screen
+            name="AskQuestion"
+            component={AskQuestion}
+            options={{ headerShown: true }} />
+          <Stack.Screen
+            name="CompanyPostQuestion"
+            component={CompanyPostQuestion}
+            options={{ headerShown: true }} />
+        </Stack.Navigator>
+      </UserContext.Provider> 
+    );
+  }
 }
+
+
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -77,7 +140,7 @@ function BottomTabNavigator() {
         options=
         {{
           headerTitle:"",
-          tabBarIcon: ({ color, focused }) => <MaterialCommunityIcons name="cards-variant" size={30} color="black" />
+          tabBarIcon: ({ color, focused }) => <MaterialCommunityIcons name="cards-variant" size={30} color={focused ? "black" : "gray"}/>
         }}
       />
       <BottomTab.Screen
@@ -113,3 +176,17 @@ function TabBarIcon(props: {
   
   {...props} />;
 }
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    width: 300,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
