@@ -40,10 +40,35 @@ const Questions = ({navigation}) => {
   }, []);
 
   return (
+    
+    <ScrollView bounces={false}>
+    <View style={{backgroundColor: 'white'}}>
+    <ScrollView style={{marginLeft: 10, marginBottom: 25, marginTop: 15}} horizontal={true} showsHorizontalScrollIndicator={false} bounces={true}>
+        <View style={styles.filterButtons}>
+          <Text style={styles.filterText}>Eczema</Text>
+        </View>
+        <View style={[styles.filterButtons, {backgroundColor: '#C09891'}]}>
+          <Text style={styles.filterText}>Acne</Text>
+        </View>
+        <View style={[styles.filterButtons, {backgroundColor: '#775144'}]}>
+          <Text style={styles.filterText}>Psoriasis</Text>
+        </View>
+        <View style={[styles.filterButtons, {backgroundColor: '#2A0800'}]}>
+          <Text style={styles.filterText}>Rosacea</Text>
+        </View>
+        <View style={[styles.filterButtons, {backgroundColor: '#C09891'}]}>
+          <Text style={styles.filterText}>Contact Dermatitis</Text>
+        </View>
+        <View style={[styles.filterButtons, {backgroundColor: '#775144'}]}>
+          <Text style={styles.filterText}>Alopecia</Text>
+        </View>
+      </ScrollView>
+      </View>
+      
     <SafeAreaView style={styles.container}>
        
       <QuestionsCarousel data={companyQuestions}/>
-      <ScrollView>
+      
             {communityQuestions.map((question)=>
             <Pressable onPress={()=> {navigation.navigate("CommunityPostQuestion",{question : question})}}>
             <View>
@@ -55,7 +80,7 @@ const Questions = ({navigation}) => {
             </View>
             </Pressable>
             )}
-      </ScrollView>
+      
       {communityQuestions.map((question)=>
         <View>
           
@@ -67,6 +92,7 @@ const Questions = ({navigation}) => {
           onPress={()=> {navigation.navigate("AskQuestion")}}
        />
     </SafeAreaView>
+    </ScrollView>
   )
 }
 
@@ -89,6 +115,23 @@ const styles =  StyleSheet.create({
       fontSize: 30,
       padding: 10,
       marginLeft: 20 
+  },
+  filterButtons: { 
+    borderWidth: 0,
+    height: 40, 
+    backgroundColor: '#BEA8A7', 
+    borderRadius: 30, 
+    marginRight: 10,
+    marginBottom: 5,
+    marginTop: 5,
+    shadowColor: 'black', shadowOffset: {width: 1, height: 1}, shadowOpacity: 0.5, shadowRadius: 1, elevation: 2
+  },
+  filterText: { 
+    color: 'white',
+    fontSize: 12, 
+    margin: 10, 
+    marginTop: 12, 
+    fontWeight:'bold'
   }
 })
 

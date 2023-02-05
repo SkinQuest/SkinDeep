@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
+import { Text, View, TextInput, Button, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { collection, addDoc } from "firebase/firestore"; 
 import React from 'react';
 
@@ -8,6 +8,16 @@ const AskQuestion = () => {
 
   const [title, setTitle] = React.useState();
   const [body, setBody] = React.useState();
+
+  const [tagSelections, setTagSelections] = React.useState<{[key: string]:boolean}>({
+      "Eczema":false, 
+      "Acne":false,
+      "Psoriasis":false,
+      "Rosacea":false,
+      "Contact":false,
+      "Dermatitis":false,
+      "Alopecia":false
+  });
 
   return (
     <View>
@@ -23,6 +33,13 @@ const AskQuestion = () => {
         value={body}
         multiline={true}
       />
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.row}>
+          {Object.keys(tagSelections).map((tag)=>
+              <Pressable onPress={()=> setTagSelections((previous)=>({...previous, [tag]:!previous[tag]}))}>
+                  <Text style={tagSelections[tag] ? styles.unpressedTags : styles.pressedTags}>{tag}</Text>
+              </Pressable>
+          )}
+      </ScrollView>
       <Button
         onPress={() => {
           postQuestion(title, body);
@@ -62,6 +79,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  pressedTags: {
+      margin:4,
+      color: 'red',
+  },
+  unpressedTags: {
+      margin:4,
+      color: 'blue',
+  }
 });
 
 export default AskQuestion;

@@ -20,6 +20,7 @@
     "galio-framework": "^0.8.0",
     "install": "^0.13.0",
     "npm": "^9.4.1",
+    "prop-types": "^15.8.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-icons": "^4.7.1",

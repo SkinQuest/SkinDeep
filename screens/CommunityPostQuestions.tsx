@@ -11,16 +11,6 @@ const CommunityPostQuestion = ({route}) => {
     const [body, setBody] = React.useState();
     const [responses, setResponses] = React.useState([]);
 
-    const [tagSelections, setTagSelections] = React.useState<{[key: string]:boolean}>({
-        "Eczema":false, 
-        "Acne":false,
-        "Psoriasis":false,
-        "Rosacea":false,
-        "Contact":false,
-        "Dermatitis":false,
-        "Alopecia":false
-    });
-
     React.useEffect(() => {
         // Fetch questions from firebase
         async function fetchResponses()
@@ -48,13 +38,7 @@ const CommunityPostQuestion = ({route}) => {
                     value={body}
                     multiline={true}
                 />
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.row}>
-                    {Object.keys(tagSelections).map((tag)=>
-                        <Pressable onPress={()=> setTagSelections((previous)=>({...previous, [tag]:!previous[tag]}))}>
-                            <Text style={tagSelections[tag] ? styles.unpressedTags : styles.pressedTags}>{tag}</Text>
-                        </Pressable>
-                    )}
-                </ScrollView>
+                
                 <Button
                     onPress={() => {
                         postUserResponse(body, question.title)
@@ -120,14 +104,6 @@ const styles =  StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-    },
-    pressedTags: {
-        margin:4,
-        color: 'red',
-    },
-    unpressedTags: {
-        margin:4,
-        colore: 'blue',
     }
 });
 
