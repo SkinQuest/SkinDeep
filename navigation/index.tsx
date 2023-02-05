@@ -6,7 +6,7 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
-import { ColorSchemeName} from 'react-native';
+import { ColorSchemeName, Pressable} from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,6 +17,9 @@ import Profile from '../screens/Profile';
 import Questions from '../screens/Questions';
 import Feed from '../screens/Feed';
 import AskQuestion from '../screens/AskQuestion';
+
+// icons
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -71,17 +74,42 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Feed"
         component={Feed}
+        options=
+        {{
+          headerTitle:"",
+          tabBarIcon: ({ color, focused }) => <MaterialCommunityIcons name="cards-variant" size={30} color="black" />
+        }}
       />
       <BottomTab.Screen
         name="Questions"
         component={Questions}
+        options=
+        {{
+          headerTitle:"",
+          tabBarIcon: ({ color, focused }) => 
+            <MaterialCommunityIcons name="comment-question-outline" size={30} color={focused ? "black" : "gray"} />
+        }}
       />
        <BottomTab.Screen
           name="Profile"
           component={Profile}
+          options=
+          {{
+            headerTitle:"",
+            tabBarIcon: ({ color, focused }) => <MaterialIcons name="person-outline" size={30} color={focused ? "black" : "gray"} />
+          }}
       />
     </BottomTab.Navigator>
   );
 }
 
 
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof FontAwesome>['name'];
+  color: string;
+  focused: boolean;
+}) {
+  return <FontAwesome size={38} style={{ marginBottom: -3, color: "blue", marginTop:5 }} 
+  
+  {...props} />;
+}

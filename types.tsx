@@ -18,6 +18,7 @@ export type RootStackParamList = {
   BottomTabNavigator: undefined;
   Profile: undefined;
   AskQuestion: undefined;
+  Feed: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

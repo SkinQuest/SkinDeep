@@ -1,8 +1,7 @@
 import { Text, View } from 'react-native';
 import React from 'react';
 
-export default function Feed() {
-
+export default function Feed({navigation}) {
 
   return (
     <View>
