@@ -78,7 +78,7 @@ const Questions = ({navigation}) => {
         
               {communityQuestions.map((question)=>
               {
-              if(intersection(question.tags, Object.keys(tagSelections).filter((tag)=>tagSelections[tag])).length != 0)
+              if(Object.keys(tagSelections).filter((tag)=>tagSelections[tag]).length == 0 || intersection(question.tags, Object.keys(tagSelections).filter((tag)=>tagSelections[tag])).length != 0)
               {
                 return(
                   <Pressable onPress={()=> {navigation.navigate("CommunityPostQuestion",{question : question})}}>
