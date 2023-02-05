@@ -96,7 +96,7 @@ class Profile extends React.Component {
                       </Text>
                     <Text
                       size={16}
-                      color="#525F7F"
+                      color="black"
                       style={{ textAlign: "center", margin:20}}
                     >
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,

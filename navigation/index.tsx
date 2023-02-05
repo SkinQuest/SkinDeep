@@ -109,7 +109,7 @@ function RootNavigator() {
           <Stack.Screen
             name="AskQuestion"
             component={AskQuestion}
-            options={{ headerShown: true }} />
+            options={{ headerShown: true, headerTitle: "" }} />
           <Stack.Screen
             name="CompanyPostQuestion"
             component={CompanyPostQuestion}
@@ -156,9 +156,9 @@ function BottomTabNavigator() {
           tabBarShowLabel: false,
           headerTitle:"",
           tabBarIcon: ({ color, focused }) => <><MaterialCommunityIcons name="cards-variant" size={30} color={focused ? "black" : "gray"}/>
-          <Text style={{ marginTop: 5, fontSize: 12, color: focused ? "black" : "gray", fontWeight: focused ? "bold" : "normal" }}>Feed</Text></>,
+          <Text style={{ marginTop: 5, fontSize: 12, color: focused ? "black" : "gray", fontWeight: focused ? "bold" : "normal" }}>About</Text></>,
           headerLeft:() => (
-            <Text style={{position: 'absolute', marginLeft: 10, marginTop: 2, fontSize: 28, fontWeight: 'bold'}}>Feed</Text>
+            <Text style={{position: 'absolute', marginLeft: 10, marginTop: 2, fontSize: 28, fontWeight: 'bold'}}></Text>
           ),
         }}
       />

@@ -29,9 +29,10 @@ const CommunityPostQuestion = ({route}) => {
         <SafeAreaView style={styles.full}>
             <View style={styles.communityView}>
                 <Text style={styles.communityText}>{question.title}</Text>
-                <Text>{question.body}</Text>
+                <Text style={{marginTop: 10, fontSize: 18}}>{question.body}</Text>
             </View>
             <View>
+            <Text style={{marginLeft: 20, marginBottom: 0, fontWeight:'bold'}}>Response:</Text>
                 <TextInput
                     style={styles.longInput}
                     onChangeText={setBody}
@@ -87,7 +88,7 @@ const styles =  StyleSheet.create({
     longInput: {
         height: 200,
         margin: 12,
-        borderWidth: 1,
+        borderWidth: 2,
         padding: 20,
         borderRadius: 20,
         fontSize: 18
@@ -109,12 +110,13 @@ const styles =  StyleSheet.create({
         flexDirection: 'row',
     },
     full:{
-        backgroundColor: 'white',
+        backgroundColor: '#EAE0D5',
         height: 800,
     },
     ask: {
         width: 250,
         marginLeft: 68,
+        marginTop: 20,
         borderRadius: 20,
         backgroundColor: '#94a817'
     },

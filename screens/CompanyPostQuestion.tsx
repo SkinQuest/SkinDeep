@@ -33,6 +33,7 @@ const CompanyPostQuestion = ({route}) => {
                 <Text style={styles.companyText}>{question.title}</Text>
             </View>
             <View>
+            <Text style={{marginLeft: 20, marginBottom: 0, fontWeight:'bold'}}>Response:</Text>
             <TextInput
             style={styles.longInput}
             onChangeText={setBody}
@@ -72,7 +73,7 @@ const styles =  StyleSheet.create({
         height: 200,
         margin: 12,
         marginTop: 20,
-        borderWidth: 1,
+        borderWidth: 2,
         padding: 20,
         borderRadius: 20,
         fontSize: 18,
@@ -94,7 +95,8 @@ const styles =  StyleSheet.create({
       width: 250,
       marginLeft: 68,
       borderRadius: 20,
-      backgroundColor: '#94a817'
+      backgroundColor: '#94a817',
+      marginTop: 18,
      },
      companyText: {
       fontSize: 30,
@@ -105,7 +107,7 @@ const styles =  StyleSheet.create({
       padding: 10,
      },
      full:{
-      backgroundColor: 'white',
+      backgroundColor: '#EAE0D5',
       height: 800,
      }
   });

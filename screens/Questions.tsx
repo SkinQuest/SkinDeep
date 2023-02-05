@@ -58,7 +58,7 @@ const Questions = ({navigation}) => {
   }, []);
 
   return (
-    
+    <View style={{backgroundColor:'white', height: 680}}>
     <ScrollView bounces={false}>
       <View style={{backgroundColor: 'white'}}>
         <ScrollView style={{marginLeft: 10, marginBottom: 25, marginTop: 15}} horizontal={true} showsHorizontalScrollIndicator={false} bounces={true}>
@@ -100,9 +100,9 @@ const Questions = ({navigation}) => {
               onPress={()=> {navigation.navigate("AskQuestion")}}
               />
               </View>
-        
       </SafeAreaView>
     </ScrollView>
+    </View>
   )
 }
 
