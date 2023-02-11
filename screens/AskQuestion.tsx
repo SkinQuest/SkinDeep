@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Button, StyleSheet, ScrollView, Pressable, SafeAreaView } from 'react-native';
+import { Text, View, TextInput, Button, StyleSheet, ScrollView, Pressable, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 import { collection, addDoc } from "firebase/firestore"; 
 import React from 'react';
 
@@ -19,6 +19,7 @@ const AskQuestion = () => {
   });
 
   return (
+    <KeyboardAvoidingView>
     <SafeAreaView style={styles.full}>
       <View style={{height: 750, backgroundColor: '#EAE0D5'}}>
       <Text style={styles.communityText}>Ask a Question:</Text>
@@ -27,15 +28,16 @@ const AskQuestion = () => {
         onChangeText={setTitle}
         value={title}
         placeholder='Ask away!'
+        placeholderTextColor='black'
       />
-      <Text style={{marginLeft: 15, marginBottom: 0, fontWeight:'bold'}}>Description:</Text>
+      <Text style={{marginLeft: 15, marginBottom: 0, fontWeight:'bold', fontSize:16, marginTop: 10}}>Description:</Text>
       <TextInput
-        style={styles.longInput}
+        style={styles.shortInput}
         onChangeText={setBody}
         value={body}
         multiline={true}
       />
-      <Text style={{marginLeft: 15, marginBottom: 10, fontWeight:'bold'}}>Add a tag to your question:</Text>
+      <Text style={{marginLeft: 15, marginBottom: 10, fontWeight:'bold', fontSize: 16, marginTop: 10}}>Add a tag to your question:</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.row}>
           {Object.keys(tagSelections).map((tag)=>
               <Pressable onPress={()=> setTagSelections((previous)=>({...previous, [tag]:!previous[tag]}))}>
@@ -59,6 +61,7 @@ const AskQuestion = () => {
       </View>
 
     </SafeAreaView>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -82,28 +85,35 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 10,
     borderRadius: 10,
+    backgroundColor: 'white',
+    opacity: 0.5,
   },
-  longInput: {
-    height: 200,
+  shortInput: {
+    height: 100,
     margin: 12,
     borderWidth: 2,
     padding: 10,
     borderRadius: 10,
+    backgroundColor: 'white',
+    opacity: 0.5
   },
   pressedTags: {
-      margin:4,
+      margin:8,
       color: 'gray',
+      fontSize: 16,
   },
   unpressedTags: {
       margin:4,
       color: 'black',
+      fontSize: 16,
+      fontWeight: 'bold'
   },
   ask: {
     width: 250,
     marginLeft: 68,
     borderRadius: 20,
     backgroundColor: '#94a817',
-    marginBottom: 260,
+    marginBottom: 330,
 },
 communityView: {
   margin: 10,
@@ -119,8 +129,12 @@ communityText: {
 }, 
 full:{
   backgroundColor: '#F2E3BC',
-  height: 400,
+  height: 900,
 },
+row: {
+  marginLeft: 10,
+  fontSize: 16,
+}
 
 });
 

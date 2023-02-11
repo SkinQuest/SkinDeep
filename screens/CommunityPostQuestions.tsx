@@ -1,4 +1,4 @@
-import { Text, View, TextInput, StyleSheet, SafeAreaView, Button, useWindowDimensions, ScrollView, Pressable } from 'react-native';
+import { Text, View, TextInput, StyleSheet, SafeAreaView, Button, useWindowDimensions, ScrollView, Pressable, KeyboardAvoidingView } from 'react-native';
 import React from 'react';
 import db from '../firebase/config'
 import { collection, addDoc, getDocs } from "firebase/firestore"; 
@@ -26,14 +26,17 @@ const CommunityPostQuestion = ({route}) => {
     }, []);
 
     return (
+        <KeyboardAvoidingView>
         <SafeAreaView style={styles.full}>
                         <ScrollView>
             <View style={styles.communityView}>
+                <Text style={{opacity: 0.3, fontSize: 16, marginBottom: 5, marginTop: 10}}>Question</Text>
                 <Text style={styles.communityText}>{question.title}</Text>
-                <Text style={{marginTop: 10, fontSize: 18}}>{question.body}</Text>
+                <Text style={{opacity: 0.3, fontSize: 16, marginTop: 13,}}>Description</Text>
+                <Text style={{marginTop: 10, fontSize: 22}}>{question.body}</Text>
             </View>
             <View>
-            <Text style={{marginLeft: 20, marginBottom: 0, fontWeight:'bold'}}>Response:</Text>
+            <Text style={{marginTop: 25,marginLeft: 20, marginBottom: 0, fontWeight:'bold', fontSize: 16}}>Response:</Text>
                 <TextInput
                     style={styles.longInput}
                     onChangeText={setBody}
@@ -54,7 +57,7 @@ const CommunityPostQuestion = ({route}) => {
             </View>
 
             {/* ANSWERS AND RESPONSES */}
-            <Text style={{marginLeft: 20, marginTop: 26, fontWeight:'bold'}}>Comments:</Text>
+            <Text style={{marginLeft: 20, marginTop: 26, fontWeight:'bold', fontSize: 16}}>Comments:</Text>
 
             {responses.map((response)=>
             {
@@ -63,7 +66,13 @@ const CommunityPostQuestion = ({route}) => {
                     return(
                         <View style={{width: SIZE}} key={response.id}>
                             <View style={styles.imageContainer}>
-                                <Text style={styles.cardText} key={response.id}>  {response.body} </Text>
+                                <View style={styles.lightBord}>
+                                <Text style={styles.cardHead}>Anonymous:</Text>
+                                <View
+                                style={{flexDirection: 'row'}}>
+                                    <Text style={styles.cardText} key={response.id}>  {response.body} </Text>
+                                </View>
+                                </View>
                             </View>
                         </View>)
                 }   
@@ -71,6 +80,7 @@ const CommunityPostQuestion = ({route}) => {
             )}
             </ScrollView>
         </SafeAreaView>
+        </KeyboardAvoidingView>
     );
 };
 
@@ -93,30 +103,45 @@ const styles =  StyleSheet.create({
         borderWidth: 2,
         padding: 20,
         borderRadius: 20,
-        fontSize: 18
+        fontSize: 18,
+        backgroundColor: 'white',
+        opacity: 0.5
       },
     imageContainer: {
-        borderRadius: 34,
+        borderRadius: 14,
         overflow: 'hidden',
-        backgroundColor: '#94a817',
+        backgroundColor: 'white',
         width: 365,
-        height: 100,
+        height: 'auto',
         margin: 10,
         opacity: 0.5,
-        marginTop: 40
+        marginTop: 30,
+        marginLeft: 12
+    },
+    lightBord: {
+        padding: 5,
+        borderColor: 'black',
+        borderWidth: 1,
+        borderRadius: 14,
+    },
+    cardHead:{
+        fontSize: 14,
+        marginLeft: 20,
+        marginTop: 15,
     },
     cardText: {
-        fontSize: 25,
-        color: 'white',
-        padding: 10,
-        marginLeft: 15 
+        fontSize: 18,
+        color: 'black',
+        padding: 10, 
+        numberOfLines: 2,
+        flexShrink: 1
     },
     row: {
         flexDirection: 'row',
     },
     full:{
         backgroundColor: '#EAE0D5',
-        height: 800,
+        height: 'auto',
     },
     ask: {
         width: 250,
