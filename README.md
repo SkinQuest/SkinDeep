@@ -1,0 +1,6 @@
+# SkinDeep
+A Community-Driven Q&amp;A Platform for Skin Health
+
+<img src='https://github.com/SkinQuest/SkinDeep/blob/054bc9ec0dfd8960089e7859c10f54eb172948cd/assets/skindeepgif.gif
+' title='Video Walkthrough' width='350' alt='Demo' />
+[1:33 AM]
