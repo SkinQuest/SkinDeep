@@ -4,10 +4,6 @@ SkinDeep is a community-based mobile platform designed to empower skin health. T
 
 <img src='https://github.com/SkinQuest/SkinDeep/blob/054bc9ec0dfd8960089e7859c10f54eb172948cd/assets/skindeepgif.gif' title='Video Walkthrough' width='300' alt='Demo' />
 
-# SkinDeep
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/deploy-status)](https://app.netlify.com/sites/skin-deep-app/deploys)
-
 ## Installation
 
 To run SkinDeep on your local machine, follow these steps:
